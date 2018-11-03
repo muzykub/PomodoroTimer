@@ -2,6 +2,7 @@ const startButton = document.querySelector(".start-btn");
 const pauseButton = document.querySelector(".pause-btn");
 const resetButton = document.querySelector(".reset-btn");
 const display = document.querySelector(".display");
+const audio = new Audio("./sound.mp3");
 let secondsIn25Minutes = 1499;
 let intervalID;
 let isRunning = false;
@@ -23,6 +24,7 @@ function updateDisplay() {
     secondsIn25Minutes--;
     display.innerHTML = convertSeconds();
     if (secondsIn25Minutes <= 0) {
+        audio.play();
         reset();
     }
 }
@@ -37,10 +39,9 @@ function convertSeconds() {
 }
 
 function resetTimer() {
-    window.clearInterval(intervalID);
     display.innerHTML = "25:00";
-    secondsIn25Minutes = 1499;
-    isRunning = false;
+    audio.pause();
+    reset();
 }
 
 function stopCounting() {
